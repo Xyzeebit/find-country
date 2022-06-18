@@ -1,0 +1,47 @@
+%flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin  small-screen {
+    @media screen and (max-width: 375px){
+        @content;
+    }
+}
+@mixin medium-screen {
+    @media (min-width: 320px) and (max-width: 768px){
+        @content;
+    }
+}
+@mixin large-screen  {
+    @media (min-width: 769px) and (max-width: 922px) {
+        @content;
+    }
+}
+@mixin xlarge-screen {
+    @media (min-width: 923px) {
+        @content;
+    }
+}
+@mixin  desktop {
+    @media (min-width: 769px) {
+        @content;
+    }
+}
+@mixin xdesktop {
+    @media (min-width: 769px) {
+        @content;
+    }
+}
+@mixin  box-shadow {
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+}
+@mixin border-radius($rad: 5) {
+    border-radius: #{$rad}px;
+}
+@mixin country-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}

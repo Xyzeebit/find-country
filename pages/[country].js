@@ -18,7 +18,7 @@ export default function Details({ data }) {
                           src='/right-arrow.svg'
                           width={25}
                           height={25}
-                          alt="back"
+                          alt="go back"
                          />
                         <span>back</span>
                     </a>

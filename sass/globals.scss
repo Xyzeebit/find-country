@@ -128,18 +128,21 @@ a {
                 margin: 5px;
             }
         }
-        ul {
-            list-style-type: none;
+        .filter_list {
             padding: 0;
             position: absolute;
             z-index: 1;
             @include box-shadow;
             @include border-radius;
+            width: 200px;
 
             margin-top: 5px;
-            li {
+            a {
                 padding: 10px 0 10px 20px;
-                cursor: pointer;
+                display: block;
+                &:hover {
+                  background: grey;
+                }
             }
         }
     }
@@ -224,6 +227,7 @@ a {
         }
         img {
           transform: rotateY(180deg);
+          filter: invert(0);
         }
     }
     .details-flag {

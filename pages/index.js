@@ -5,18 +5,24 @@ import { useState, useEffect, useContext } from 'react';
 import Country from '../components/Country';
 import ThemeContext from '../components/ThemeContext';
 
+import all from '../data';
+import countries from '../rest-countries';
 
-export default function Home({ data }) {
+
+export default function Home() {
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
   const [showList, setShowList] = useState(false);
   const [theme] = useContext(ThemeContext);
+  const data = all.data;
+  console.log(countries)
 
   const router = useRouter();
 
   const submitSearch = evt => {
     evt.preventDefault();
     console.log(search)
+    // find search item in data
     setSearch('');
   }
   const showFilterList = () => {
@@ -41,15 +47,17 @@ export default function Home({ data }) {
 
   useEffect(() => {
     let queryIndex = router.asPath.indexOf('?');
-    console.log(queryIndex)
+    console.log(queryIndex);
+
     if(queryIndex > -1) {
-      
+
       setFilter(
         router.asPath.split('?')[1].split('=')[1]
       )
     }
   }, [router]);
   useEffect(() => {
+    // console.log(all)
     if(filter) {
       console.log(filter)
     }
@@ -60,7 +68,7 @@ export default function Home({ data }) {
       <Head>
         <title>Search Country</title>
         <meta name="description" content="Learn about any country in the world" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome-min.css" />
       </Head>
       <div className="search-bar">
@@ -113,9 +121,9 @@ export default function Home({ data }) {
             </Link>
             <Link href={{
               pathname: '/',
-              query: { region: 'america' }
+              query: { region: 'americas' }
             }}>
-              <a onClick={showFilterList}>America</a>
+              <a onClick={showFilterList}>Americas</a>
             </Link>
               <Link href={{
                 pathname: '/',
@@ -143,14 +151,31 @@ export default function Home({ data }) {
         </div>
       </div>
       <div className="grid">
-        {data.map((country, i) => {
+        {countries.data.map((country, i) => {
+
+          const countryName = country.name.common;
+          const population = country.population + '';
+          const flag = country.flags.svg;
+          // const capital = country.capital.join(', ');
+          let capital = '';
+          if(country.capital) {
+            capital = country.capital.join(', ');
+          }
+          const region = country.region;
+
           return (
-            <Link key={country.country.slug + i} href={{
+            <Link key={country.common + i} href={{
               pathname: '/[country]',
-              query:{country: country.country.slug}
+              query:{country: country.common}
               }}>
               <a style={{ color: theme.text }}>
-                <Country />
+                <Country
+                  countryName={countryName}
+                  population={population}
+                  flag={flag}
+                  capital={capital}
+                  region={region}
+                />
               </a>
             </Link>
           )
@@ -159,25 +184,4 @@ export default function Home({ data }) {
       </div>
     </div>
   )
-}
-
-
-export async function getStaticProps() {
-  const data = [
-    { country: { slug: 'germany' } },
-    { country: { slug: 'belgium' } },
-    { country: { slug: 'germany' } },
-    { country: { slug: 'germany' } },
-    { country: { slug: 'germany' } },
-    { country: { slug: 'germany' } },
-    { country: { slug: 'germany' } },
-    { country: { slug: 'germany' } },
-
-  ];
-
-  return {
-    props: {
-      data
-    }
-  }
 }

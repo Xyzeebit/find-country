@@ -5,4 +5,7 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'style')]
   },
+  images: {
+    domains: ['flagcdn.com']
+  }
 }

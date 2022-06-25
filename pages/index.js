@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useMemo } from 'react';
 import Country from '../components/Country';
 import ThemeContext from '../components/ThemeContext';
 
@@ -14,15 +14,29 @@ export default function Home() {
   const [filter, setFilter] = useState('');
   const [showList, setShowList] = useState(false);
   const [theme] = useContext(ThemeContext);
-  const data = all.data;
-  console.log(countries)
+  const [data, setData] = useState(countries.data);
+
+  console.log(data)
 
   const router = useRouter();
 
   const submitSearch = evt => {
     evt.preventDefault();
-    console.log(search)
-    // find search item in data
+    console.log('search for', search)
+    // const _data = Object.create(countries);
+    const result = countries.data.filter((c) => {
+      if(c.name.common.search(search) > 0) {
+        return true;
+      }
+    })
+    console.log('result', result)
+    if(result) {
+      if(Array.isArray(result)) {
+        setData(result);
+      } else {
+        setData([result]);
+      }
+    }
     setSearch('');
   }
   const showFilterList = () => {
@@ -35,19 +49,18 @@ export default function Home() {
 
   async function findCountryByRegion() {
     const { region } = router.query;
-    // const resp = await fetch(`/api/search?region=${region}`);
-    // const _data = await resp.json();
-    console.log(region);
-  }
-
-  async function searchCountry() {
-    const { search } = router.query;
-    console.log(search);
+    const result = countries.data.filter(c => c.region.toLowerCase() === filter);
+    if(result) {
+      if(Array.isArray(result)) {
+        setData(result);
+      } else {
+        setData([result]);
+      }
+    }
   }
 
   useEffect(() => {
     let queryIndex = router.asPath.indexOf('?');
-    console.log(queryIndex);
 
     if(queryIndex > -1) {
 
@@ -56,10 +69,12 @@ export default function Home() {
       )
     }
   }, [router]);
+
   useEffect(() => {
-    // console.log(all)
+
     if(filter) {
       console.log(filter)
+      findCountryByRegion();
     }
   }, [filter]);
 
@@ -75,12 +90,12 @@ export default function Home() {
         <form
           style={{
               background: theme.foreground
-            }}>
+            }}
+            onSubmit={submitSearch}
+        >
 
           <div className="input-group">
-            <span style={{background: theme.foreground}}>
-              <i className="fa fa-search" style={{color: theme.input}} />
-            </span>
+
             <input
               type="text"
               placeholder="Search for a country..."
@@ -88,9 +103,13 @@ export default function Home() {
               name="search"
               onChange={({ target }) => setSearch(target.value)}
               style={{
-                background: theme.foreground,
+                backgroundColor: theme.foreground,
                 color: theme.text,
                 '--placeholder-color': theme.input,
+                backgroundImage: 'url(/icon-search.svg)',
+                backgroundPosition: 'left center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 25
               }}
             />
           </div>
@@ -151,12 +170,11 @@ export default function Home() {
         </div>
       </div>
       <div className="grid">
-        {countries.data.map((country, i) => {
+        {data.map((country, i) => {
 
           const countryName = country.name.common;
-          const population = country.population + '';
+          const population = country.population.toLocaleString('en-US');
           const flag = country.flags.svg;
-          // const capital = country.capital.join(', ');
           let capital = '';
           if(country.capital) {
             capital = country.capital.join(', ');
@@ -164,7 +182,7 @@ export default function Home() {
           const region = country.region;
 
           return (
-            <Link key={country.common + i} href={{
+            <Link key={countryName + i} href={{
               pathname: '/[country]',
               query:{country: country.common}
               }}>

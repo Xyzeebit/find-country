@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useRouter} from 'next/router';
 import React, { useContext, useState, useEffect } from 'react';
 import ThemeContext, { THEMES } from './ThemeContext';
 import Image from 'next/image';
@@ -5,17 +7,18 @@ import Image from 'next/image';
 const Layout = ({ children }) => {
   const [mode, setMode] = useState(true);
   const [theme, setTheme] = useContext(ThemeContext);
-  
+  const router = useRouter();
+
   const toggleMode = () => {
     if (mode) {
       setMode(false); // dark mode
-      
+
     } else {
       setMode(true);  // light mode
-      
+
     }
   }
-  
+
   useEffect(() => {
     setTheme((mode ? THEMES.light : THEMES.dark));
   }, [mode, setTheme]);
@@ -28,14 +31,14 @@ const Layout = ({ children }) => {
         <div
           style={{color: theme.text}}
           className="nav-title">
-          Where in the world?
+          <Link href="/"><a onClick={() => router.reload() }>Where in the world?</a></Link>
         </div>
         <button
           style={{background: theme.foreground, color: theme.text}}
           className="toggle-mode-button"
           onClick={toggleMode}>
           <span>
-            <Image 
+            <Image
               src={`/${mode ? 'moon-dark.svg' : 'moon-light.svg'}`}
               alt="site mode"
               width={20}

@@ -99,7 +99,7 @@ a {
         input {
             @include border-radius;
             border: none;
-            padding: 5px 5px 5px 10px;
+            padding: 5px 5px 5px 30px;
             &:focus {
                 outline: none;
             }
@@ -108,7 +108,7 @@ a {
             display: inline-flex;
             justify-content: space-between;
             align-items: center;
-            padding-left: 20px;
+
             span {
                 padding-right: 15px;
             }

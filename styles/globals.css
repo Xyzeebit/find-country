@@ -100,7 +100,7 @@ a {
 .search-bar form input {
   border-radius: 5px;
   border: none;
-  padding: 5px 5px 5px 10px;
+  padding: 5px 5px 5px 30px;
 }
 .search-bar form input:focus {
   outline: none;
@@ -109,7 +109,6 @@ a {
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
 }
 .search-bar form .input-group span {
   padding-right: 15px;

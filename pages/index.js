@@ -15,19 +15,21 @@ export default function Home() {
   const [showList, setShowList] = useState(false);
   const [theme] = useContext(ThemeContext);
   const [data, setData] = useState(countries.data);
+  const [showSearch, setshowSearch] = useState({ show: false, search: '' });
 
-  console.log(data)
+  // console.log(data)
 
   const router = useRouter();
 
   const submitSearch = evt => {
     evt.preventDefault();
-    console.log('search for', search)
     // const _data = Object.create(countries);
     const result = countries.data.filter((c) => {
-      if(c.name.common.search(search) > 0) {
+      const name = c.name.common.toLowerCase();
+      if(name.match(search.toLowerCase()) !== null) {
         return true;
       }
+      return false;
     })
     console.log('result', result)
     if(result) {
@@ -37,6 +39,7 @@ export default function Home() {
         setData([result]);
       }
     }
+    setshowSearch({ show: true, search })
     setSearch('');
   }
   const showFilterList = () => {
@@ -73,8 +76,8 @@ export default function Home() {
   useEffect(() => {
 
     if(filter) {
-      console.log(filter)
       findCountryByRegion();
+      setshowSearch(s => s.show = false);
     }
   }, [filter]);
 
@@ -162,13 +165,12 @@ export default function Home() {
               }}>
                 <a onClick={showFilterList}>Oceania</a>
               </Link>
-
-
           </div>
-
-
         </div>
       </div>
+      {showSearch.show && <div className="search_details">
+        Showing result for "{showSearch.search}"...
+      </div>}
       <div className="grid">
         {data.map((country, i) => {
 

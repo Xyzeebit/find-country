@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
         <div
           style={{color: theme.text}}
           className="nav-title">
-          <Link href="/"><a onClick={() => router.reload() }>Where in the world?</a></Link>
+          <Link href="/"><a onClick={() => {router.push('/'); router.reload();} }>Where in the world?</a></Link>
         </div>
         <button
           style={{background: theme.foreground, color: theme.text}}

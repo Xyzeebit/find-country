@@ -355,5 +355,9 @@ a {
     width: 40vw;
   }
 }
+.search_details {
+  padding: 30px 0 10px 0;
+  font-weight: 600;
+}
 
 /*# sourceMappingURL=globals.css.map */

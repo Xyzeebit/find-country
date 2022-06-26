@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useContext, useMemo } from 'react';
 import Country from '../components/Country';
 import ThemeContext from '../components/ThemeContext';
+// import List from '../components/List';
 
 import all from '../data';
 import countries from '../rest-countries';
@@ -50,7 +51,7 @@ export default function Home() {
     setShowList(false);
   }, [filter]);
 
-  async function findCountryByRegion() {
+  function findCountryByRegion() {
     const { region } = router.query;
     const result = countries.data.filter(c => c.region.toLowerCase() === filter);
     if(result) {
@@ -60,6 +61,10 @@ export default function Home() {
         setData([result]);
       }
     }
+  }
+
+  function handleBlur(evt) {
+    console.log(evt)
   }
 
   useEffect(() => {
@@ -77,7 +82,7 @@ export default function Home() {
 
     if(filter) {
       findCountryByRegion();
-      setshowSearch(s => s.show = false);
+      setshowSearch({ ...showSearch, show: false });
     }
   }, [filter]);
 
@@ -105,6 +110,7 @@ export default function Home() {
               value={search}
               name="search"
               onChange={({ target }) => setSearch(target.value)}
+              onBlur={handleBlur}
               style={{
                 backgroundColor: theme.foreground,
                 color: theme.text,
@@ -182,12 +188,10 @@ export default function Home() {
             capital = country.capital.join(', ');
           }
           const region = country.region;
+          const path = country.name.common.toLowerCase().replace(/\W+/g, '-')
 
           return (
-            <Link key={countryName + i} href={{
-              pathname: '/[country]',
-              query:{country: country.common}
-              }}>
+            <Link key={countryName + i} href={`/${path}`}>
               <a style={{ color: theme.text }}>
                 <Country
                   countryName={countryName}
@@ -205,3 +209,31 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getStaticProps() {
+//   const resp = await fetch('api/rest-countries');
+//   const data = await resp.json();
+//
+//   return {
+//     props: {
+//       data,
+//     },
+//   }
+// }
+
+// export async function getStaticPaths() {
+//
+//   const paths = [];
+//   for(let country of countries.data) {
+//     const uri = country.name.common.replace(/\W+/g, '-');
+//     paths.push(
+//       {
+//         params: { country: uri }
+//       }
+//     )
+//   }
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }

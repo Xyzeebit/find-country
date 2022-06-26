@@ -8,7 +8,7 @@ import ThemeContext from "../components/ThemeContext";
 export default function Details({ data }) {
     const router = useRouter();
     const [theme] = useContext(ThemeContext);
-    // console.log(router)
+    // console.log(router.query)
     return (
         <div className="details">
             <div className="back">

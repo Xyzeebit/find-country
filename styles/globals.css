@@ -153,7 +153,8 @@ a {
   padding-bottom: 50px;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
-  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 300ms ease-in-out;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.19), -1px 4px 0px 0px rgba(0, 0, 0, 0.19), -1px 4px 0px 0px rgba(0, 0, 0, 0.19), -1px 1px 0px 0px rgba(0, 0, 0, 0.19);
 }
 @media (min-width: 320px) and (max-width: 768px) {
   .country {
@@ -164,6 +165,9 @@ a {
   .country {
     width: 350px;
   }
+}
+.country:hover {
+  box-shadow: none;
 }
 .country img.flag {
   display: block;
@@ -217,7 +221,6 @@ a {
   outline: none;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
   border: none;
   justify-content: space-between;
   width: 6rem;

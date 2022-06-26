@@ -12,16 +12,23 @@ const Layout = ({ children }) => {
   const toggleMode = () => {
     if (mode) {
       setMode(false); // dark mode
-
     } else {
       setMode(true);  // light mode
-
     }
   }
 
   useEffect(() => {
     setTheme((mode ? THEMES.light : THEMES.dark));
   }, [mode, setTheme]);
+
+  useEffect(() => {
+    if(mode) {
+      document.getElementsByTagName('body')[0].style.backgroundColor = THEMES.light.background;
+    } else {
+      document.getElementsByTagName('body')[0].style.backgroundColor = THEMES.dark.background;
+
+    }
+  }, [mode]);
 
   return (
     <>
@@ -31,7 +38,7 @@ const Layout = ({ children }) => {
         <div
           style={{color: theme.text}}
           className="nav-title">
-          <Link href="/"><a onClick={() => {router.push('/'); router.reload();} }>Where in the world?</a></Link>
+          <Link href="/"><a onClick={() => {router.push('/');} }>Where in the world?</a></Link>
         </div>
         <button
           style={{background: theme.foreground, color: theme.text}}
@@ -48,8 +55,7 @@ const Layout = ({ children }) => {
           <span>{`${mode ? 'Light Mode' : 'Dark Mode'}`}</span>
         </button>
       </nav>
-      <main
-        style={{ background: theme.background }}>
+      <main>
         {children}
       </main>
       </>

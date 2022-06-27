@@ -18,7 +18,7 @@ export default function Home() {
   const [data, setData] = useState(countries.data);
   const [showSearch, setshowSearch] = useState({ show: false, search: '' });
 
-  // console.log(data)
+  console.log(data[0])
 
   const router = useRouter();
 
@@ -191,7 +191,7 @@ export default function Home() {
           const path = country.name.common.toLowerCase().replace(/\W+/g, '-')
 
           return (
-            <Link key={countryName + i} href={`/${path}`}>
+            <Link key={countryName + i} href='/[country]' as={`/${path}`}>
               <a style={{ color: theme.text }}>
                 <Country
                   countryName={countryName}
@@ -209,6 +209,14 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps() {
+//   return {
+//     props: {
+//       data: countries.data.slice(0, 40)
+//     }
+//   }
+// }
 
 // export async function getStaticProps() {
 //   const resp = await fetch('api/rest-countries');

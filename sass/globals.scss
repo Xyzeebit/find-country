@@ -151,6 +151,9 @@ a {
 ::-webkit-input-placeholder {
     color: var(--placeholder-color)
 }
+
+
+
 .country {
     @include medium-screen {
       width: 80vw;
@@ -221,7 +224,7 @@ a {
             outline: none;
             padding: 10px;
             @include border-radius;
-            // @include box-shadow;
+            @include box-shadow;
             border: none;
             @extend %flex;
             justify-content: space-between;
@@ -252,6 +255,7 @@ a {
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        flex-wrap: wrap;
         .border-country-title {
             font-size: 15px;
             font-weight: 700;
@@ -338,8 +342,8 @@ a {
         width: 45%;
         margin-right: 2rem;
         img {
-            width: 400px !important;
-            height: 250px !important;
+            width: 300px;
+            min-height: 250px;
         }
     }
     .country-info {
@@ -366,10 +370,48 @@ a {
     .country-info {
         @include country-info;
         width: 40vw;
+
+    }
+    .details-summary {
+      padding-left: 30px;
     }
 
 }
 .search_details {
   padding: 30px 0 10px 0;
   font-weight: 600;
+}
+.details-content {
+  @include mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .details-flag {
+      width: 100%;
+      margin: 0 auto;
+      img {
+        max-width: 80vw;
+      }
+    }
+  }
+
+  @include tablet {
+    flex-direction: row;
+    .details-flag {
+      img {
+        width: 300px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @include pc {
+    .details-flag {
+      img {
+        width: 400px;
+        margin: 0 auto;
+      }
+    }
+  }
 }

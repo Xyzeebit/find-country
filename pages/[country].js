@@ -1,14 +1,62 @@
 import { useRouter } from "next/router";
 import Image from 'next/image'
 import Link from 'next/link'
-import { useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import ThemeContext from "../components/ThemeContext";
+import countries from '../rest-countries';
 
-
-export default function Details({ data }) {
+export default function Details() {
     const router = useRouter();
     const [theme] = useContext(ThemeContext);
-    // console.log(router.query)
+    const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    function parseData(data) {
+
+      const countryName = data.name.common;
+      const nativeName = data.name.official;
+      const population = data.population.toLocaleString('en-US');
+      const region = data.region;
+      const subRegion = data.subregion;
+      const capital = data.capital.join(', ');
+      let languages = [];
+      for(let key of Object.keys(data.languages)) {
+        languages.push(data.languages[key])
+      }
+      languages = languages.join(', ');
+      const flag = 'flag.jpg' //data.flags.svg;
+      const topLevelDomain = data.tld[0];
+      const borderCountries = data.borders ? populateBorders(data.borders) : [];
+      const currencies = Object.values(data.currencies)[0].name;
+
+      const borderCountriesURI = borderCountries ? borderCountries.map(b => b.toLowerCase().replace(/\W+/g, '-')) : [];
+      setData({
+        countryName, nativeName,
+        population, region,
+        subRegion, capital,
+        languages, flag,
+        topLevelDomain, borderCountries,
+        currencies, borderCountriesURI
+      });
+    }
+
+    function populateBorders(borders) {
+      return borders.map(b => countries.data.find(c => c.fifa === b)).filter(b => b !== undefined).map(b => b.name.common);
+    }
+
+    useEffect(() => {
+      const { country } = router.query;
+      if(!country) return;
+      const _data = countries.data.find(c => c.name.common.toLowerCase() === country.replace(/\W+/g, ' ').toLowerCase());
+      if(!_data) return;
+      parseData(_data);
+      setLoading(false);
+    }, [router]);
+
+    if(loading) {
+      return <p>Loading...</p>;
+    }
+
     return (
         <div className="details">
             <div className="back">
@@ -26,7 +74,7 @@ export default function Details({ data }) {
             </div>
             <div className="details-content">
                 <div className="details-flag">
-                    <Image
+                    <img
                         src={data.flag}
                         alt={`flag of ${data.countryName}`}
                         width={300}
@@ -56,53 +104,20 @@ export default function Details({ data }) {
                             <li><span style={{color: theme.text}}>Languages:</span> <span style={{ color: theme.input }}>{data.languages}</span></li>
                         </ul>
                     </div>
-                    {data.borderCountries &&
+                    {data.borderCountries.length ?
                         <div className="border-countries">
                             <div className="border-country-title" style={{color: theme.text}}>
                                 Border countries:
                             </div>
-                            {data.borderCountries.map((country) => (
-                                <Link href={`/${country}`} key={country}>
+                            {data.borderCountries.map((country, i) => (
+                                <Link href={`/${data.borderCountriesURI[i]}`} key={country}>
                                     <a style={{ color: theme.input, background: theme.foreground }}>{country}</a>
                                 </Link>
                             ))}
-                        </div>
+                        </div> : null
                     }
                 </div>
             </div>
         </div>
     );
-}
-
-export async function getStaticProps({ params }) {
-    const data = {
-        countryName:     params.country,
-        nativeName:      'Dutch land',
-        population:      '80,790,900',
-        region:          'Europe',
-        subRegion:       'Western Europe',
-        capital:         'Berlin',
-        flag:            '/flag.jpg',
-        topLevelDomain:  'ge',
-        currencies:      ['euro'],
-        languages:        ['German'],
-        borderCountries: ['belgium', 'france', 'poland', 'switzerland']
-    };
-    data['currencies'] = data.currencies.toString().split(',').join(', ');
-    data['languages'] = data.languages.toString().split(',').join(', ');
-    return {
-        props: {
-            data
-        }
-    }
-}
-
-export async function getStaticPaths() {
-    // Get the paths we want to pre-render based on posts
-    const route = 'germany'
-    const paths = [{ params: { country: route, slug: 'ger' }}, { params: { country: 'belgium' }}];
-
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
-    return { paths, fallback: false }
 }

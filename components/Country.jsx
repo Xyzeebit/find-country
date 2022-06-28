@@ -11,7 +11,7 @@ export default function Country({ countryName, population, region, capital, flag
             color: theme.input,
 
         }}>
-            <Image
+            <img
                 src={flag}
                 alt="Flag"
                 width={300}

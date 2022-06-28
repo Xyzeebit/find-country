@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import { useState, useEffect, useContext, useMemo } from 'react';
 import Country from '../components/Country';
 import ThemeContext from '../components/ThemeContext';
-// import List from '../components/List';
+import List from '../components/List';
 
-import all from '../data';
+// import all from '../data';
 import countries from '../rest-countries';
 
 
@@ -175,7 +175,10 @@ export default function Home() {
       {showSearch.show && <div className="search_details">
         Showing result for "{showSearch.search}"...
       </div>}
-      <div className="grid">
+
+      <List countries={data} />
+
+      {/*<div className="grid">
         {data.map((country, i) => {
 
           const countryName = country.name.common;
@@ -203,7 +206,7 @@ export default function Home() {
           )
         })}
 
-      </div>
+      </div>*/}
     </div>
   )
 }

@@ -57,13 +57,23 @@
     @content;
   }
 }
+@mixin mobile-x {
+  @media screen and (min-width: 601px) {
+    @content;
+  }
+}
 @mixin tablet {
   @media screen and (min-width: 761px) {
     @content;
   }
 }
+@mixin tablet-x {
+  @media screen and (min-width: 861px) {
+    @content;
+  }
+}
 @mixin pc {
-  @media screen and (min-width: 981px) {
+  @media screen and (min-width: 1120px) {
     @content;
   }
 }

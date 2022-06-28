@@ -18,8 +18,6 @@ export default function Home() {
   const [data, setData] = useState(countries.data);
   const [showSearch, setshowSearch] = useState({ show: false, search: '' });
 
-  console.log(data[0])
-
   const router = useRouter();
 
   const submitSearch = evt => {
@@ -182,7 +180,7 @@ export default function Home() {
 
           const countryName = country.name.common;
           const population = country.population.toLocaleString('en-US');
-          const flag = country.flags.svg;
+          const flag = '/flag.jpg'; //country.flags.svg;
           let capital = '';
           if(country.capital) {
             capital = country.capital.join(', ');

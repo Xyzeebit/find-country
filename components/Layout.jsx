@@ -45,11 +45,12 @@ const Layout = ({ children }) => {
           className="toggle-mode-button"
           onClick={toggleMode}>
           <span>
-            <Image
-              src={`/${mode ? 'moon-dark.svg' : 'moon-light.svg'}`}
+            <img
+              src='/sun-color.svg'
               alt="site mode"
               width={20}
               height={20}
+              style={{ filter: `${theme.mode === 0 ? 'invert(144%) sepia(1) saturate(42.6) hue-rotate(161.4deg) brightness(0.51)' : 'invert(0)'}`}}
             />
           </span>
           <span>{`${mode ? 'Light Mode' : 'Dark Mode'}`}</span>

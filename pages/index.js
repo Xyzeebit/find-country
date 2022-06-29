@@ -29,10 +29,9 @@ export default function Home() {
 
   const submitSearch = evt => {
     evt.preventDefault();
-    // const _data = Object.create(countries);
+
     const result = countries.data.filter((c) => {
       const sanitized = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&').toLowerCase();
-      // const regex = new RegExp(sanitized, 'g');
       const name = c.name.common.toLowerCase();
       if(matched(name, sanitized)) return true;
 
@@ -52,7 +51,7 @@ export default function Home() {
 
       return false;
     })
-    console.log('result', result)
+
     if(result) {
       if(Array.isArray(result)) {
         setData(result);

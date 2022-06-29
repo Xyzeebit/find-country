@@ -152,6 +152,7 @@ a {
   }
   @include mobile-x {
     grid-template-columns: 1fr 1fr;
+    align-self: stretch;
   }
   @include tablet-x {
     grid-template-columns: 1fr 1fr 1fr;

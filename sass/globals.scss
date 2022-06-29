@@ -257,43 +257,56 @@ a {
 
 .details {
   @include mobile {
-    padding: 20px;
+    padding: 40px;
   }
 }
 .details-content {
-  @include mobile {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    @include box-shadow;
-    padding: 20px;
+  // @include mobile {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: flex-start;
+  //   flex-direction: column;
+  //   // @include box-shadow;
+    // padding: 20px;
     margin-bottom: 3rem;
+  // }
+  // @include tablet {
+  //   flex-direction: row;
+  // }
+  // @include pc {
+  //   justify-content: space-between;
+  // }
+  @include mobile {
+    display: grid;
+    grid-template-columns: 1fr;
   }
   @include tablet {
-    flex-direction: row;
-  }
-  @include pc {
-    justify-content: space-between;
+    grid-template-columns: 35vw 50vw;
+    column-gap: 8vw;
   }
 }
 .details-flag {
   @include mobile {
     width: 100%;
   }
-  @include tablet {
-    width: 50%;
-  }
-  @include pc {
-    width: 40%;
-  }
+  // @include tablet {
+  //   width: 50%;
+  // }
+  // @include tablet-x {
+  //   width: 40%;
+  // }
+  // @include pc {
+  //   width: 40%;
+  // }
   img {
     width: 100%;
     @include mobile {
-      height: 200px;
+      // height: 200px;
+      // height: 400px;
+      height: 100%;
     }
     @include mobile-x {
-      height: 230px;
+      height: 250px;
     }
     @include tablet {
       height: 250px;
@@ -304,15 +317,20 @@ a {
   }
 }
 .details-summary {
-    margin-left: 20px;
-    @include pc {
-      width: 60%;
-    }
+    // margin-left: 20px;
+    // @include tablet-x {
+    //   width: 60%;
+    // }
+    // @include pc {
+    //   width: 65%;
+    // }
+    width: 100%;
     .country-name {
         font-weight: 700;
-        font-size: 30px;
+        font-size: 28px;
         @include mobile {
           margin-top: 40px;
+          margin-bottom: 10px;
         }
         @include tablet {
           margin-top: 0;
@@ -324,10 +342,11 @@ a {
     @include mobile {
       justify-content: flex-start;
       flex-direction: column;
+      font-size: 0.9rem;
     }
     @include tablet {
       justify-content: space-between;
-
+      flex-direction: row;
     }
     align-items: flex-start;
     ul {
@@ -339,13 +358,6 @@ a {
         }
     }
 }
-// .border-countries {
-//     flex-wrap: wrap;
-//     justify-content: center;
-//     .border-country-title {
-//
-//     }
-// }
 
 .border-countries {
     display: flex;
@@ -356,7 +368,6 @@ a {
         font-size: 15px;
         font-weight: 700;
         margin-right: 5px;
-        width: 100%;
     }
     a {
         outline: none;

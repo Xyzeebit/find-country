@@ -20,14 +20,36 @@ export default function Home() {
 
   const router = useRouter();
 
+  const matched = (text, matcher) => {
+    if(text.match(matcher) !== null) {
+      return true;
+    }
+    return false;
+  }
+
   const submitSearch = evt => {
     evt.preventDefault();
     // const _data = Object.create(countries);
     const result = countries.data.filter((c) => {
+      const sanitized = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&').toLowerCase();
+      // const regex = new RegExp(sanitized, 'g');
       const name = c.name.common.toLowerCase();
-      if(name.match(search.toLowerCase()) !== null) {
-        return true;
+      if(matched(name, sanitized)) return true;
+
+      const official = c.name.official.toLowerCase();
+      if(matched(official, sanitized)) return true;
+
+      if(c.capital) {
+        const capitals = c.capital.map(cap => matched(cap.toLowerCase(), sanitized));
+        if(capitals.includes(true)) return true;
       }
+
+      if(c.continents) {
+        const continents = c.continents.map(con => matched(con.toLowerCase(), sanitized));
+        if(continents.includes(true)) return true;
+      }
+
+
       return false;
     })
     console.log('result', result)
@@ -61,10 +83,6 @@ export default function Home() {
     }
   }
 
-  function handleBlur(evt) {
-    console.log(evt)
-  }
-
   useEffect(() => {
     let queryIndex = router.asPath.indexOf('?');
 
@@ -73,6 +91,8 @@ export default function Home() {
       setFilter(
         router.asPath.split('?')[1].split('=')[1]
       )
+    } else {
+      setData(countries.data);
     }
   }, [router]);
 
@@ -108,7 +128,6 @@ export default function Home() {
               value={search}
               name="search"
               onChange={({ target }) => setSearch(target.value)}
-              onBlur={handleBlur}
               style={{
                 backgroundColor: theme.foreground,
                 color: theme.text,
@@ -176,9 +195,9 @@ export default function Home() {
         Showing result for "{showSearch.search}"...
       </div>}
 
-      <List countries={data} />
+      {/*<List countries={data} />*/}
 
-      {/*<div className="grid">
+      {<div className="grid">
         {data.map((country, i) => {
 
           const countryName = country.name.common;
@@ -206,43 +225,7 @@ export default function Home() {
           )
         })}
 
-      </div>*/}
+      </div>}
     </div>
   )
 }
-
-// export async function getServerSideProps() {
-//   return {
-//     props: {
-//       data: countries.data.slice(0, 40)
-//     }
-//   }
-// }
-
-// export async function getStaticProps() {
-//   const resp = await fetch('api/rest-countries');
-//   const data = await resp.json();
-//
-//   return {
-//     props: {
-//       data,
-//     },
-//   }
-// }
-
-// export async function getStaticPaths() {
-//
-//   const paths = [];
-//   for(let country of countries.data) {
-//     const uri = country.name.common.replace(/\W+/g, '-');
-//     paths.push(
-//       {
-//         params: { country: uri }
-//       }
-//     )
-//   }
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }

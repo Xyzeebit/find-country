@@ -6,12 +6,14 @@ export const THEMES = {
         foreground: 'hsl(0, 0%, 100%)', // element
         text: 'hsl(200, 15%, 8%)',
         input: 'hsl(0, 0%, 52%)',
+        mode: 0,
     },
     dark: {
         background: 'hsl(207, 26%, 17%)',
         foreground: 'hsl(209, 23%, 22%)',
         text: 'hsl(0, 0%, 100%)',
         input: 'hsl(0, 0%, 52%)',
+        mode: 1
     }
 }
 

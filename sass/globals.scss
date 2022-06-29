@@ -19,6 +19,9 @@ a {
 .main {
   @include mobile {
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
   @include mobile-x {
     padding: 25px;
@@ -37,6 +40,7 @@ a {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
+    // align-self: flex-start;
   }
   @include mobile-x {
     justify-content: space-between;
@@ -139,6 +143,7 @@ a {
 
 .grid {
   @include mobile {
+    align-self: center;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 80vw;
@@ -221,403 +226,144 @@ a {
   }
 }
 
-// .grid {
-//     display: grid;
-//     grid-template-columns: 1fr;
-//     row-gap: 65px;
-//     padding-top: 40px;
-//     a {
-//         justify-self: center;
-//     }
-//
-// }
-// @include medium-screen {
-//     .grid {
-//         grid-template-columns: 1fr;
-//     }
-//     .search-bar {
-//         display: block;
-//         form {
-//             input {
-//                 width: 100%;
-//                 height: 45px;
-//             }
-//             margin-bottom: 35px;
-//         }
-//     }
-//     .search-filter {
-//         button {
-//             width: 250px;
-//         }
-//         ul {
-//              width: 250px;
-//         }
-//     }
-// }
-//
-// @include large-screen {
-//     .grid {
-//         grid-template-columns: repeat(2, 1fr);
-//     }
-// }
-//
-// @include xlarge-screen {
-//     .grid {
-//         grid-template-columns: repeat(4, 1fr);
-//     }
-// }
-// .main {
-//     padding: 20px 30px 30px 30px;
-//
-//
-// }
-// @include desktop {
-//     .main {
-//         padding: 30px 50px 50px 50px;
-//     }
-//     .search-bar {
-//         flex-direction: row;
-//         justify-content: space-between;
-//
-//         form {
-//             input {
-//                 height: 45px;
-//                 width: 300px;
-//             }
-//         }
-//     }
-//     .search-filter {
-//         button {
-//             width: 200px;
-//             cursor: pointer;
-//         }
-//         ul {
-//              width: 200px;
-//         }
-//     }
-// }
-//
-// .search-bar {
-//     @extend %flex;
-//     position: relative;
-//     form {
-//         border-radius: 5px;
-//         @include box-shadow;
-//         input {
-//             @include border-radius;
-//             border: none;
-//             padding: 5px 5px 5px 30px;
-//             &:focus {
-//                 outline: none;
-//             }
-//         }
-//         .input-group {
-//             display: inline-flex;
-//             justify-content: space-between;
-//             align-items: center;
-//
-//             span {
-//                 padding-right: 15px;
-//             }
-//         }
-//     }
-//     .search-filter {
-//
-//         button {
-//             outline: none;
-//             padding: 10px;
-//             @include border-radius;
-//             @include box-shadow;
-//             border: none;
-//             @extend %flex;
-//             justify-content: space-between;
-//             span {
-//                 margin: 5px;
-//             }
-//         }
-//         .filter_list {
-//             padding: 0;
-//             position: absolute;
-//             z-index: 1;
-//             @include box-shadow;
-//             @include border-radius;
-//             width: 200px;
-//
-//             margin-top: 5px;
-//             a {
-//                 padding: 10px 0 10px 20px;
-//                 display: block;
-//                 &:hover {
-//                   background: grey;
-//                 }
-//             }
-//         }
-//     }
-// }
-// ::-webkit-input-placeholder {
-//     color: var(--placeholder-color)
-// }
-//
-//
-//
-// .country {
-//     @include medium-screen {
-//       width: 80vw;
-//     }
-//     @include desktop {
-//       width: 350px;
-//     }
-//     display: flex;
-//     // justify-self: center;
-//     justify-content: flex-start;
-//     align-items: flex-start;
-//     flex-direction: column;
-//     padding-bottom: 50px;
-//     border-bottom-left-radius: 5px;
-//     border-bottom-right-radius: 5px;
-//     transition: all 300ms ease-in-out;
-//     &:hover {
-//       box-shadow: none;
-//     }
-//
-//     @include box-shadow-all;
-//     img.flag {
-//         display: block;
-//         @include medium-screen {
-//           width: 80vw !important;
-//           height: 250px;
-//         }
-//         @include desktop {
-//           width: 350px !important;
-//           height: 250px;
-//         }
-//         border-top-left-radius: 5px;
-//         border-top-right-radius: 5px;
-//     }
-//     .country-name {
-//         font-weight: 700;
-//         font-size: 18px;
-//         padding-left: 20px;
-//         margin-top: 20px;
-//         margin-bottom: 15px;
-//     }
-//     .country-text {
-//         font-size: 14px;
-//         padding: 5px 0 10px 20px;
-//         span {
-//             &:first-child {
-//                 font-weight: 600;
-//             }
-//         }
-//     }
-// }
-// @include desktop {
-//     .country {
-//         width: 250px;
-//         .flag {
-//             width: 300px;
-//             height: 200px;
-//         }
-//     }
-// }
-// a {
-//     text-decoration: none;
-// }
-// .details {
-//     .back {
-//         margin-bottom: 5rem;
-//         a {
-//             outline: none;
-//             padding: 10px;
-//             @include border-radius;
-//             @include box-shadow;
-//             border: none;
-//             @extend %flex;
-//             justify-content: space-between;
-//             width: 6rem;
-//             // span {
-//             //     margin-left: 5px;
-//             // }
-//         }
-//         img {
-//           transform: rotateY(180deg);
-//           filter: invert(0);
-//         }
-//     }
-//     .details-flag {
-//         @include box-shadow;
-//     }
-//     .details-summary {
-//         ul {
-//             list-style-type: none;
-//             padding: 0;
-//         }
-//         .country-name {
-//             font-weight: 700;
-//             font-size: 30px;
-//         }
-//     }
-//     .border-countries {
-//         display: flex;
-//         justify-content: flex-start;
-//         align-items: center;
-//         flex-wrap: wrap;
-//         .border-country-title {
-//             font-size: 15px;
-//             font-weight: 700;
-//             margin-right: 5px;
-//         }
-//         a {
-//             outline: none;
-//             padding: 5px 20px 5px 20px;
-//             @include border-radius(3);
-//             @include box-shadow;
-//             border: none;
-//             margin: 5px;
-//             font-size: 14px;
-//         }
-//     }
-//     .country-info {
-//         ul {
-//             li {
-//                 padding: 5px 5px 5px 0;
-//                 span {
-//                     font-size: 14px;
-//                     &:first-child {
-//                         font-weight: 700;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-//
-// }
-//
-// @include medium-screen {
-//     .details {
-//         padding: 20px;
-//     }
-//     .details-content {
-//
-//     }
-//     .details-flag {
-//         // width: 320px;
-//         img {
-//             width: 100vw !important;
-//             height: 200px !important;
-//         }
-//     }
-//     .details-summary {
-//         margin-left: 20px;
-//         .country-name {
-//             font-weight: 700;
-//             font-size: 30px;
-//             margin-top: 40px;
-//         }
-//     }
-//     .country-info {
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: space-between;
-//         align-items: flex-start;
-//         ul {
-//             li {
-//                 padding: 10px 10px 10px 0;
-//             }
-//         }
-//     }
-//     .border-countries {
-//         flex-wrap: wrap;
-//         justify-content: center;
-//         .border-country-title {
-//             width: 100%;
-//         }
-//     }
-// }
-//
-// @include large-screen {
-//     .details {
-//         padding: 3rem;
-//     }
-//     .details-content {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//     }
-//     .details-flag {
-//         width: 45%;
-//         margin-right: 2rem;
-//         img {
-//             width: 300px;
-//             min-height: 250px;
-//         }
-//     }
-//     .country-info {
-//         @include country-info;
-//     }
-// }
-// @include xlarge-screen {
-//     .details {
-//         padding: 5rem;
-//     }
-//     .details-content {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//     }
-//     .details-flag {
-//         width: 500px;
-//
-//         img {
-//             width: 500px !important;
-//             height: 350px !important;
-//         }
-//     }
-//     .country-info {
-//         @include country-info;
-//         width: 40vw;
-//
-//     }
-//     .details-summary {
-//       padding-left: 30px;
-//     }
-//
-// }
-// .search_details {
-//   padding: 30px 0 10px 0;
-//   font-weight: 600;
-// }
-// .details-content {
-//   @include mobile {
-//     display: flex;
+.details {
+    .back {
+        margin-bottom: 3rem;
+        a {
+            outline: none;
+            padding: 10px;
+            @include border-radius;
+            @include box-shadow;
+            border: none;
+            @extend %flex;
+            justify-content: space-between;
+            width: 6rem;
+            // span {
+            //     margin-left: 5px;
+            // }
+        }
+        img {
+          transform: rotateY(180deg);
+          filter: invert(0);
+        }
+    }
+  }
+
+.search_details {
+  padding: 30px 0 10px 0;
+  font-weight: 600;
+}
+
+.details {
+  @include mobile {
+    padding: 20px;
+  }
+}
+.details-content {
+  @include mobile {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    @include box-shadow;
+    padding: 20px;
+    margin-bottom: 3rem;
+  }
+  @include tablet {
+    flex-direction: row;
+  }
+  @include pc {
+    justify-content: space-between;
+  }
+}
+.details-flag {
+  @include mobile {
+    width: 100%;
+  }
+  @include tablet {
+    width: 50%;
+  }
+  @include pc {
+    width: 40%;
+  }
+  img {
+    width: 100%;
+    @include mobile {
+      height: 200px;
+    }
+    @include mobile-x {
+      height: 230px;
+    }
+    @include tablet {
+      height: 250px;
+    }
+    @include pc {
+      height: 300px;
+    }
+  }
+}
+.details-summary {
+    margin-left: 20px;
+    @include pc {
+      width: 60%;
+    }
+    .country-name {
+        font-weight: 700;
+        font-size: 30px;
+        @include mobile {
+          margin-top: 40px;
+        }
+        @include tablet {
+          margin-top: 0;
+        }
+    }
+}
+.country-info {
+    display: flex;
+    @include mobile {
+      justify-content: flex-start;
+      flex-direction: column;
+    }
+    @include tablet {
+      justify-content: space-between;
+
+    }
+    align-items: flex-start;
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
+        li {
+            padding: 10px 10px 10px 0;
+        }
+    }
+}
+// .border-countries {
+//     flex-wrap: wrap;
 //     justify-content: center;
-//     align-items: center;
-//     flex-direction: column;
-//     .details-flag {
-//       width: 100%;
-//       margin: 0 auto;
-//       img {
-//         max-width: 80vw;
-//       }
-//     }
-//   }
+//     .border-country-title {
 //
-//   @include tablet {
-//     flex-direction: row;
-//     .details-flag {
-//       img {
-//         width: 300px;
-//         margin: 0 auto;
-//       }
 //     }
-//   }
-//
-//   @include pc {
-//     .details-flag {
-//       img {
-//         width: 400px;
-//         margin: 0 auto;
-//       }
-//     }
-//   }
 // }
+
+.border-countries {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    .border-country-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin-right: 5px;
+        width: 100%;
+    }
+    a {
+        outline: none;
+        padding: 5px 20px 5px 20px;
+        @include border-radius(3);
+        @include box-shadow;
+        border: none;
+        margin: 5px;
+        font-size: 14px;
+    }
+}

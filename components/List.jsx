@@ -8,19 +8,42 @@ export default function List({ countries }) {
   const LIMIT = 20;
   const [data, setData] = useState(countries.slice(0, LIMIT));
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreItems);
+  // const [hasMore, setHasMore] = useState(true);
   const [theme] = useContext(ThemeContext);
-  console.log(data);
+
+  // console.log('is fetching', isFetching, 'has more', hasMore);
+  console.log('fetched', data);
+
   function fetchMoreItems() {
+    console.log('fetching outside');
+
     setTimeout(() => {
+      let fetching, more;
       if(data.length + LIMIT < countries.length) {
         setData([...data, ...countries.slice(data.length, data.length + LIMIT)]);
+        fetching = true;
+        console.log('fetching');
+        // more = true;
+        // setHasMore(true);
         // console.log(data);
+
       } else {
         setData([...data, ...countries.slice(data.length)]);
+        // setIsFetching(false);
+        fetching = false;
+        console.log('fetching');
+
+        // more = false;
+        // setHasMore(false);
+        // console.log(data);
       }
-      setIsFetching(false);
+      setIsFetching(fetching);
+      // setHasMore(more);
+      console.log(data);
+
     }, 1500);
   }
+
 
   return (
     <>
@@ -51,7 +74,7 @@ export default function List({ countries }) {
           })
         }
       </div>
-      {isFetching && <Loader /> }
+      {(isFetching) && <Loader /> }
     </>
   );
 }

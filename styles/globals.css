@@ -1,4 +1,10 @@
 @import url(https://fonts.google.com/specimen/Nunito+Sans:300,600,800);
+.details .back a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 html,
 body {
   margin: 0;
@@ -18,6 +24,9 @@ a {
 @media screen and (min-width: 320px) {
   .main {
     padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 }
 @media screen and (min-width: 601px) {
@@ -146,6 +155,7 @@ a {
 
 @media screen and (min-width: 320px) {
   .grid {
+    align-self: center;
     margin-top: 20px;
     display: grid;
     grid-template-columns: 80vw;
@@ -222,6 +232,163 @@ a {
   to {
     transform: rotate(360deg);
   }
+}
+.details .back {
+  margin-bottom: 3rem;
+}
+.details .back a {
+  outline: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  justify-content: space-between;
+  width: 6rem;
+}
+.details .back img {
+  transform: rotateY(180deg);
+  filter: invert(0);
+}
+
+.search_details {
+  padding: 30px 0 10px 0;
+  font-weight: 600;
+}
+
+@media screen and (min-width: 320px) {
+  .details {
+    padding: 20px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .details-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+    margin-bottom: 3rem;
+  }
+}
+@media screen and (min-width: 761px) {
+  .details-content {
+    flex-direction: row;
+  }
+}
+@media screen and (min-width: 1120px) {
+  .details-content {
+    justify-content: space-between;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .details-flag {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 761px) {
+  .details-flag {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 1120px) {
+  .details-flag {
+    width: 40%;
+  }
+}
+.details-flag img {
+  width: 100%;
+}
+@media screen and (min-width: 320px) {
+  .details-flag img {
+    height: 200px;
+  }
+}
+@media screen and (min-width: 601px) {
+  .details-flag img {
+    height: 230px;
+  }
+}
+@media screen and (min-width: 761px) {
+  .details-flag img {
+    height: 250px;
+  }
+}
+@media screen and (min-width: 1120px) {
+  .details-flag img {
+    height: 300px;
+  }
+}
+
+.details-summary {
+  margin-left: 20px;
+}
+@media screen and (min-width: 1120px) {
+  .details-summary {
+    width: 60%;
+  }
+}
+.details-summary .country-name {
+  font-weight: 700;
+  font-size: 30px;
+}
+@media screen and (min-width: 320px) {
+  .details-summary .country-name {
+    margin-top: 40px;
+  }
+}
+@media screen and (min-width: 761px) {
+  .details-summary .country-name {
+    margin-top: 0;
+  }
+}
+
+.country-info {
+  display: flex;
+  align-items: flex-start;
+}
+@media screen and (min-width: 320px) {
+  .country-info {
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 761px) {
+  .country-info {
+    justify-content: space-between;
+  }
+}
+.country-info ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.country-info ul li {
+  padding: 10px 10px 10px 0;
+}
+
+.border-countries {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.border-countries .border-country-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-right: 5px;
+  width: 100%;
+}
+.border-countries a {
+  outline: none;
+  padding: 5px 20px 5px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+  border: none;
+  margin: 5px;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=globals.css.map */

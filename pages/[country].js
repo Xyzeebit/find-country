@@ -12,9 +12,9 @@ export default function Details() {
     const [loading, setLoading] = useState(true);
 
     function parseData(data) {
-
+      // console.log(data);
       const countryName = data.name.common;
-      const nativeName = data.name.official;
+      const nativeName = Object.values(Object.values(data.name.nativeName)[0])[0];
       const population = data.population.toLocaleString('en-US');
       const region = data.region;
       const subRegion = data.subregion;
@@ -62,11 +62,12 @@ export default function Details() {
             <div className="back">
                 <Link href="/">
                     <a style={{ color: theme.text }} className="back-button">
-                        <Image
+                        <img
                           src='/right-arrow.svg'
                           width={25}
                           height={25}
                           alt="go back"
+                          style={{ filter: `invert(${theme.mode})` }}
                          />
                         <span>back</span>
                     </a>

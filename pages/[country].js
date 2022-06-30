@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import Image from 'next/image'
+import Head from 'next/head'
 import Link from 'next/link'
 import { useState, useEffect, useContext } from "react";
 import ThemeContext from "../components/ThemeContext";
@@ -59,6 +59,10 @@ export default function Details() {
 
     return (
         <div className="details">
+          <Head>
+            <title>{data.countryName}</title>
+            <link rel="icon" href="/favicon.png" />
+          </Head>
             <div className="back">
                 <Link href="/">
                     <a style={{ color: theme.text }} className="back-button">

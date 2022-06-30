@@ -73,6 +73,7 @@ export default function Home() {
   function findCountryByRegion() {
     const { region } = router.query;
     const result = countries.data.filter(c => c.region.toLowerCase() === filter);
+
     if(result) {
       if(Array.isArray(result)) {
         setData(result);
@@ -194,9 +195,9 @@ export default function Home() {
         Showing result for "{showSearch.search}"...
       </div>}
 
-      {/*<List countries={data} />*/}
+      {<List data={data} />}
 
-      {<div className="grid">
+      {/*<div className="grid">
         {data.map((country, i) => {
 
           const countryName = country.name.common;
@@ -224,7 +225,7 @@ export default function Home() {
           )
         })}
 
-      </div>}
+      </div>*/}
     </div>
   )
 }

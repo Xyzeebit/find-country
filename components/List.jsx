@@ -4,51 +4,52 @@ import Country from './Country';
 import Link from 'next/link';
 import ThemeContext from './ThemeContext';
 
-export default function List({ countries }) {
+export default function List({ data }) {
   const LIMIT = 20;
-  const [data, setData] = useState(countries.slice(0, LIMIT));
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreItems);
-  // const [hasMore, setHasMore] = useState(true);
+
+  const [countries, setCountries] = useState({ data: [], hasMore: true, current: 0 });
+
   const [theme] = useContext(ThemeContext);
 
-  // console.log('is fetching', isFetching, 'has more', hasMore);
-  console.log('fetched', data);
+  // console.log('fetched', countries);
 
   function fetchMoreItems() {
-    console.log('fetching outside');
-
+    if(!countries.hasMore) return;
+    // console.log('calling fetchMore');
     setTimeout(() => {
-      let fetching, more;
-      if(data.length + LIMIT < countries.length) {
-        setData([...data, ...countries.slice(data.length, data.length + LIMIT)]);
-        fetching = true;
-        console.log('fetching');
-        // more = true;
-        // setHasMore(true);
-        // console.log(data);
-
+      if(data.length > LIMIT + countries.current) {
+        setCountries(prev => ({
+          data: [...prev.data, ...data.slice(prev.current, prev.current + LIMIT)],
+          hasMore: true,
+          current: prev.current + LIMIT
+        }));
       } else {
-        setData([...data, ...countries.slice(data.length)]);
-        // setIsFetching(false);
-        fetching = false;
-        console.log('fetching');
-
-        // more = false;
-        // setHasMore(false);
-        // console.log(data);
+        setCountries(prev => ({
+          data: [...prev.data, ...data.slice(prev.current)],
+          hasMore: false,
+          current: data.length
+        }));
       }
-      setIsFetching(fetching);
-      // setHasMore(more);
-      console.log(data);
-
+      setIsFetching(false);
     }, 1500);
+
   }
 
+  useEffect(() => {
+    if(countries.data.length > 1) return;
+    console.log('initial fetch');
+    fetchMoreItems();
+  }, []);
+
+  // useEffect(() => {
+  //   setData(prev => [...prev, ...countries]);
+  // }, [countries]);
 
   return (
     <>
       <div className="grid">
-        { data.map((country, i) => {
+        {countries.data && countries.data.map((country, i) => {
             const countryName = country.name.common;
             const population = country.population.toLocaleString('en-US');
             const flag = '/flag.jpg'; //country.flags.svg;
@@ -74,7 +75,7 @@ export default function List({ countries }) {
           })
         }
       </div>
-      {(isFetching) && <Loader /> }
+      {(isFetching && countries.hasMore) && <Loader /> }
     </>
   );
 }

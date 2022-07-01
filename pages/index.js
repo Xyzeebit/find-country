@@ -3,14 +3,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { useState, useEffect, useContext, useMemo } from 'react';
 import Country from '../components/Country';
+import BackToTop from '../components/BackToTop';
 import ThemeContext from '../components/ThemeContext';
-import List from '../components/List';
 
 // import all from '../data';
 import countries from '../rest-countries';
 
 
 export default function Home() {
+  const LIMIT = 20;
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
   const [showList, setShowList] = useState(false);
@@ -26,6 +27,7 @@ export default function Home() {
     }
     return false;
   }
+
 
   const submitSearch = evt => {
     evt.preventDefault();
@@ -65,6 +67,7 @@ export default function Home() {
   const showFilterList = () => {
     setShowList(!showList);
   }
+
 
   useEffect(() => {
     setShowList(false);
@@ -195,9 +198,7 @@ export default function Home() {
         Showing result for "{showSearch.search}"...
       </div>}
 
-      {<List data={data} />}
-
-      {/*<div className="grid">
+      {<div className="grid">
         {data.map((country, i) => {
 
           const countryName = country.name.common;
@@ -224,8 +225,8 @@ export default function Home() {
             </Link>
           )
         })}
-
-      </div>*/}
+      </div>}
+      <BackToTop />
     </div>
   )
 }

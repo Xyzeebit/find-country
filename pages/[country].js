@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect, useContext } from "react";
 import ThemeContext from "../components/ThemeContext";
 import countries from '../rest-countries';
+import Loader from '../components/Loader';
 
 export default function Details() {
     const router = useRouter();
@@ -54,7 +55,7 @@ export default function Details() {
     }, [router]);
 
     if(loading) {
-      return <p>Loading...</p>;
+      return <div className="loader-countries"><Loader /></div>;
     }
 
     return (

@@ -235,6 +235,13 @@ a {
     transform: rotate(360deg);
   }
 }
+.loader-countries {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .details .back {
   margin-bottom: 3rem;
 }

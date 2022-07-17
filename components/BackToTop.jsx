@@ -25,7 +25,6 @@ export default function BackToTop() {
       transform: 'rotate(-90deg)',
       width: 80,
       height: 100,
-      // filter: 'invert(0)'
     }
   }
 

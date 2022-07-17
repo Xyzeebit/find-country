@@ -35,7 +35,8 @@
     }
 }
 @mixin  box-shadow {
-    box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+    //box-shadow: 0 0px 0px 0px rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+	filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.19));
 }
 @mixin border-radius($rad: 5) {
     border-radius: #{$rad}px;

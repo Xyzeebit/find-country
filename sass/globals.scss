@@ -237,23 +237,33 @@ a {
 .details {
     .back {
         margin-bottom: 3rem;
+		.link-container {
+			@include box-shadow;
+			width: 100px;
+			height: 50px;
+			@include border-radius;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			transition: all 200ms ease;
+		}
         a {
             outline: none;
             padding: 10px;
-            @include border-radius;
-            @include box-shadow;
             border: none;
             @extend %flex;
             justify-content: space-between;
             width: 6rem;
-            // span {
-            //     margin-left: 5px;
-            // }
         }
         img {
           transform: rotateY(180deg);
           filter: invert(0);
         }
+		
+		.link-container:active {
+			filter: none;
+		}
+		
     }
   }
 

@@ -65,18 +65,20 @@ export default function Details() {
             <link rel="icon" href="/favicon.png" />
           </Head>
             <div className="back">
-                <Link href="/">
-                    <a style={{ color: theme.text }} className="back-button">
-                        <img
-                          src='/right-arrow.svg'
-                          width={25}
-                          height={25}
-                          alt="go back"
-                          style={{ filter: `invert(${theme.mode})` }}
-                         />
-                        <span>back</span>
-                    </a>
-                </Link>
+				<div style={{ background: theme.background }} className="link-container">
+					<Link href="/">
+						<a style={{ color: theme.text }} className="back-button">
+							<img
+							src='/right-arrow.svg'
+							width={25}
+							height={25}
+							alt="go back"
+							style={{ filter: `invert(${theme.mode})` }}
+							/>
+							<span>back</span>
+						</a>
+					</Link>
+				</div>
             </div>
             <div className="details-content">
                 <div className="details-flag">

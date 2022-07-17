@@ -96,6 +96,7 @@ export default function Home() {
       )
     } else {
       setData(countries.data);
+      setshowSearch({ ...showSearch, show: false });
     }
   }, [router]);
 

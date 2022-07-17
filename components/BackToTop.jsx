@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
-  const image = '/arrow-right.svg';
+  const image = '/right-arrow.svg';
 
   const styles = {
     container: {
@@ -23,8 +23,8 @@ export default function BackToTop() {
     },
     img: {
       transform: 'rotate(-90deg)',
-      width: 80,
-      height: 100,
+      width: 30,
+      height: 30,
     }
   }
 

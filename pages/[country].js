@@ -19,7 +19,7 @@ export default function Details() {
       const population = data.population.toLocaleString('en-US');
       const region = data.region;
       const subRegion = data.subregion;
-      const capital = data.capital.join(', ');
+      const capital = (data.capital) ? data.capital.join(', ') : 'N/A';
       let languages = [];
       for(let key of Object.keys(data.languages)) {
         languages.push(data.languages[key])

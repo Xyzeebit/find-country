@@ -25,7 +25,7 @@ export default function Details() {
         languages.push(data.languages[key])
       }
       languages = languages.join(', ');
-      const flag = 'flag.jpg' //data.flags.svg;
+      const flag = data.flags.svg;
       const topLevelDomain = data.tld[0];
       const borderCountries = data.borders ? populateBorders(data.borders) : [];
       const currencies = Object.values(data.currencies)[0].name;

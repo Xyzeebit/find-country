@@ -204,11 +204,8 @@ export default function Home() {
 
           const countryName = country.name.common;
           const population = country.population.toLocaleString('en-US');
-          const flag = '/flag.jpg'; //country.flags.svg;
-          let capital = '';
-          if(country.capital) {
-            capital = country.capital.join(', ');
-          }
+          const flag = country.flags.svg;
+          const capital = country.capital ? country.capital.join(', ') : 'N/A';
           const region = country.region;
           const path = country.name.common.toLowerCase().replace(/\W+/g, '-')
 
